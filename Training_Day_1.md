@@ -1,4 +1,4 @@
-# Công ty Nhân Hòa - Kế hoạch đào tạo 7 ngày (Ngày 1)
+# Công ty Nhân Hòa - Kế hoạch đào tạo 7 ngày (Ngày 1 Mục 1-12)
 
 ## Mục lục
 
