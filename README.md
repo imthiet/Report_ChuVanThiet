@@ -1,11 +1,16 @@
-# Công ty Nhân Hòa
+# Công ty Nhân Hòa - Kế hoạch đào tạo 7 ngày
 
 ## Mục lục
-- [Giới thiệu](#giới-thiệu)
+
+- [1 Nội Quy Văn Hóa Doanh Nghiệp](#1-nội-quy-văn-hóa-doanh-nghiệp)
+  - [1.1 Giới thiệu về doanh nghiệp Nhân Hòa](#11-giới-thiệu-về-doanh-nghiệp-nhân-hòa)
+  - [1.2 Văn hóa giao tiếp](#12-văn-hóa-giao-tiếp)
+
 - [Dịch vụ](#dịch-vụ)
 - [Liên hệ](#liên-hệ)
-- [Tung Tom](#tung-tom-av)
-## Giới thiệu
+
+## 1 Nội Quy Văn Hóa Doanh Nghiệp
+
 Công ty Nhân Hòa chuyên cung cấp các dịch vụ CNTT...
 
 ## Dịch vụ
@@ -17,6 +22,4 @@ Công ty Nhân Hòa chuyên cung cấp các dịch vụ CNTT...
 ## Liên hệ
 - Website: [nhanhoa.com](https://nhanhoa.com)
 - Email: info@nhanhoa.com
-## Tung Tom Av
-- Website: [facebook.com](https://facebook.com)
-- Email: avatarbaron@gmail.com
+
