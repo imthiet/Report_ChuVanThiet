@@ -442,12 +442,146 @@ B1: Bật IIS nếu chưa bật
     
   ![image](https://github.com/user-attachments/assets/1dc18c47-f0e4-45b3-868e-9f389c49a1eb)
 
+B2: Tạo file HTML demo1
+  - Tạo folder chứa file demo1: C:\interpub\wwwroot\demo1
+
+  ![image](https://github.com/user-attachments/assets/a398c643-c3ae-4cdf-8917-d68f9f93288c)
 
 
+  - Thêm file index.html để làm trang giao diện.
+  - Code demo:
+    ```   
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Demo1 Site</title>
+    </head>
+    <body>
+        <h1>Demo1 Site - IIS Windows!</h1>
+    </body>
+    </html>
+    
+    ```
+  ![image](https://github.com/user-attachments/assets/d5ce93b7-db8c-4207-8ce2-8626ee522f02)
+
+  B3: Thêm website vào IIS
+  
+
+  
+  - Mở IIS Manager:
+
+    - Nhấn Win + R, gõ inetmgr, Enter.
+
+![image](https://github.com/user-attachments/assets/992ad1fc-6166-40d6-8ca6-f512fc1f70e7)
+
+  - Trong panel bên trái:
+
+    - Click chuột phải vào Sites → chọn Add Website...
+    - 
+    ![image](https://github.com/user-attachments/assets/01381748-c349-4e3c-9b42-c52d8c7d69c6)
+
+
+  - Nhập thông tin:
+    
+    ![image](https://github.com/user-attachments/assets/ab3e4afc-4374-4c81-b536-66de3094e6d6)
+
+    - Site name: demo1
+    
+    - Physical path: C:\inetpub\wwwroot\demo1
+    
+    - Port: để mặc định là 80 (hoặc đổi nếu cần)
+    
+    - Host name: (tuỳ chọn) demo1_html
+    - 
+    ![image](https://github.com/user-attachments/assets/30fcada9-cf03-4bcc-acf3-909cd905c58a)
+
+  - Nhấn OK để tạo website.
+    
+  B4: Truy cập vào web để kiểm tra:
+  
+http://localhost/demo1/
+
+  ![image](https://github.com/user-attachments/assets/713ac53a-f203-4683-8960-a7e063aa3031)
+
+  
 
 ### 2.2.2 Triển khai site demo2 asp classic trên web server IIS
+
+- Tương Tự với phần trên, bật IIS - World Wide Web Services - ASP
+  
+   ![image](https://github.com/user-attachments/assets/61ae3783-0c89-433c-b46a-2068e516f969)
+- tạo file demo2 .asp để demo nằm trong thư mục: C:\inetpub\wwwroot\demo2
+- Tạo file index.asp tương tự
+  
+![image](https://github.com/user-attachments/assets/4e11f947-ba41-4ba0-ac0e-97189f5b1635)
+
+![image](https://github.com/user-attachments/assets/6e50365f-c389-4883-ada7-5e478ee427e3)
+
+- Thêm site vừa tạo vào IIS
+  - Mở IIS Manager: Windows + R -> inetmgr -> Enter
+  - LÀm tương tự như với site html như trên.( Lưu ý port 80 vì site html đang dùng)
+    
+  ![image](https://github.com/user-attachments/assets/bc563e0f-ffe4-4083-ab7a-6752afa3fd5a)
+
+  Truy cập: Localhost/demo2/
+
+  Kết quả:
+  
+![image](https://github.com/user-attachments/assets/c1ce1157-b494-4a96-9058-8ed5fec5dec5)
+
+  
+
 ### 2.2.3 Triển khai site demo3 .net(3.5, 4.x) trên web server IIS
+
+- Tương Tự với phần trên, bật IIS - World Wide Web Services - ASP.NET(3.4 và 4.8)
+- Tạo file index.aspx trong folder C:\inetpub\wwwroot\demo3
+- 
+  ![image](https://github.com/user-attachments/assets/b054c60f-7d6b-4b02-b8f0-fffcac854298)
+  
+- Thêm Site vào IIS manager tương tự như trên. Chú ý path và port để tránh xung đột hoặc lỗi 404 
+- Kết quả:
+
+![image](https://github.com/user-attachments/assets/f334ed72-c61b-4f99-83ba-173bca1a2027)
+
+
+
 ### 2.2.4 Triển khai site demo4 php trên web server IIS
 
 
+- PHP không nằm sẵn trong Windows feature để bật nền cần cài PHP
+  - Tải PHP từ:  https://windows.php.net/download/ (bản Non thread safe)
+
+ ![image](https://github.com/user-attachments/assets/6c78a26d-5fc5-4c56-b74e-0dda7ff7ff7e)
+
+
+
+  - Giải nén vào thư mục C:\php(tùy chỉnh)
+  
+![image](https://github.com/user-attachments/assets/ab89cd15-51a5-4e9b-aacb-21feade8fb6d)
+
+  - Thêm PHP vào system Path:
+    - Window + R -> sysdm.cpl -> Enter
+    - Chuyển sang tab Advanced -> Environment variables
+
+    ![image](https://github.com/user-attachments/assets/f96e0ce7-7f3b-4af1-95ec-de61103f25dd)
+    
+
+    - Ở System variables chọn Path -> edit
+
+    ![image](https://github.com/user-attachments/assets/2785b081-101b-49f5-8b14-a7814fc55fc4)
+    
+    - Thêm Path C:\php vào và Nhấn OK -> OK!
+  - Cấu hình IIS để xử lý .php bằng FastCGI
+    - Mở cmd -> inetmgr ->Enter
+    - Chọn server ở side trái
+    - mở handle Mapping
+    - Ở khung bên phải -> chọn Add Module Mapping
+      - Request path: *.php
+      - Module: FastCgiModule
+      - Executable: C:\php\
+      - Name: PHP_via_FASTCGI
+    - CLick OK - > YES
+  - Kiểm tra FastCGI: mở FastCGI SETTING -> kiểm tra có đường dẫn C:\php\php-cgi.exe. Nếu chưa có thì ADD Aplication
+  
+  -Restart IIS: mở cmd quyền admin và chạy   `iisreset `
 
