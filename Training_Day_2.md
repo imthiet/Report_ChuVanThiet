@@ -15,7 +15,12 @@
      - [2.1.3 Triển khai site wordpress tách web server, DB server](#213-triển-khai-site-wordpress-tách-web-server-db-server)
    
      - [2.1.4 Bash Script cài đặt LAMP,LEMP stack](#214-bash-script-cài-đặt-lamp-lemp-stack)
-       
+  - [2.2 Windows](#22-windows)
+    - [2.2.1 Triển khai site demo1 html basic trên web server IIS](#221-triển-khai-site-demo1-html-basic-trên-web-server-iis)
+    - [2.2.2 Triển khai site demo2 asp classic trên web server IIS](#222-triển-khai-site-demo2-asp-classic-trên-web-server-iis)
+    - [2.2.3 Triển khai site demo3 .net(3.5, 4.x) trên web server IIS](#223-triển-khai-site-demo3-net35-4x-trên-web-server-iis)
+    - [2.2.4 Triển khai site demo4 php trên web server IIS](#224-triển-khai-site-demo4-php-trên-web-server-iis)
+             
 ## 1 DNS
 
 ### 1.1 Hệ Thống DNS
@@ -422,4 +427,27 @@ echo "Try: http://localhost"
 echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/info.php > /dev/null
 
 ```
+
+## 2.2 Windows
+ - Với hệ điều hành windows, có vẻ như việc triển khai web dễ dàng hơn với GUI.
+### 2.2.1 Triển khai site demo1 html basic trên web server IIS
+
+B1: Bật IIS nếu chưa bật
+ - Control Panel -> Program-> Turn Windows feature on or off
+ - Chọn Internet Information Services, Web management Tools, World Wide Web Services
+    
+![image](https://github.com/user-attachments/assets/fae91301-225d-4b08-9d43-27b1bd92039d)
+
+  - Nhấn OK -> Restart để apply changes:
+    
+  ![image](https://github.com/user-attachments/assets/1dc18c47-f0e4-45b3-868e-9f389c49a1eb)
+
+
+
+
+### 2.2.2 Triển khai site demo2 asp classic trên web server IIS
+### 2.2.3 Triển khai site demo3 .net(3.5, 4.x) trên web server IIS
+### 2.2.4 Triển khai site demo4 php trên web server IIS
+
+
 
