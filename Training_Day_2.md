@@ -100,6 +100,37 @@ B1: Cài đặt Lamp stack:
 
   
   B5: Tạo file config cho Wordpress
+  
+  `cd /var/www/html`
+  
+  `cp wp-config-sample.php wp-config.php`
+
+  - Chỉnh sửa file wp-config.php
+
+  `sudo nano wp-config.php
+`
+  - Thay đổi Config trong file:
+    
+  `define('DB_NAME', 'wordpress');`
+  
+  `define('DB_USER', 'wpuser');`
+  
+  `define('DB_PASSWORD', 'strongpassword');`
+  
+  `define('DB_HOST', 'localhost');`
+
+![image](https://github.com/user-attachments/assets/3fdd1494-18cc-4c1a-9bdf-bbf68c12657c)
+
+  B6: Khởi động lại Apache
+
+  `sudo systemctl restart apache2`
+  
+  -> Thành công triển khai 1 site WordPress với Lamp Stack
+
+  ![image](https://github.com/user-attachments/assets/7a8ff2b7-a42d-4908-aa67-f133fdcdc74c)
+
+  
+
 
   
 
