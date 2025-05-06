@@ -1,16 +1,18 @@
 
-# Công ty Nhân Hòa - Kế hoạch đào tạo 7 ngày (Ngày 2 Mục 13-)
+# Công ty Nhân Hòa - Kế hoạch đào tạo 7 ngày (Ngày 2 Mục 13-15)
 
 ## Mục lục
 
 - [1 DNS](#1-dns)
   - [1.1 Tìm hiểu về hệ thống DNS](#11-hệ-thống-dns)
   - [1.2 Các loại bản ghi sử dụng trong DNS](#12-các-loại-bản-ghi-trong-dns)
- 
-- [2 Công Cụ Làm Việc Trong Quá Trình Thực Tập](#2-công-cụ-làm-việc-trong-quá-trình-thực-tập)
-  - [2.1 Chat trao đổi](#21-công-cụ-trao-đổi)
-  - [2.2 GitHub](#22-github)
 
+- [2 Triển khai ứng dụng Web](#3-triển-khai-ứng-dụng-web)
+  - [2.1 Linux](#21-linux)
+    - [2.1.1 Triển khai site wordpress trên LAMP stack](#211-triển-khai-site-wordpress-trên-lamp-stack)
+     - [2.1.2 Triển khai site wordpress trên LAMP stack](#212-triển-khai-site-wordpress-trên-lamp-stack)
+     - [2.1.3 Triển khai site wordpress trên LAMP stack](#213-triển-khai-site-wordpress-trên-lamp-stack)
+     - [2.1.4 Triển khai site wordpress trên LAMP stack](#214-triển-khai-site-wordpress-trên-lamp-stack)
 ## 1 DNS
 
 ### 1.1 Hệ Thống DNS
@@ -39,4 +41,8 @@
     - MX(Mail Exchange): Chỉ định máy chủ mail cho tên miền
     - NS(Name Server): Chỉ định các DNS server có thẩm quyền cho tên miền
     - Ngoài ra còn TXT,PTR,SOA,SRV,CAA,... 
+
+### 2 Triển khai ứng dụng Web
+#### 2.1 Linux
+##### 2.1.1  Triển khai Site Wordpress trên Lamp stack
 
