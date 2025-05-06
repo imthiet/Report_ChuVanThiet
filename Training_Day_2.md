@@ -558,7 +558,8 @@ http://localhost/demo1/
 
   - Giải nén vào thư mục C:\php(tùy chỉnh)
   
-![image](https://github.com/user-attachments/assets/ab89cd15-51a5-4e9b-aacb-21feade8fb6d)
+![image](https://github.com/user-attachments/assets/7fd7138f-0bd7-4bd8-8a27-051d535e6f43)
+
 
   - Thêm PHP vào system Path:
     - Window + R -> sysdm.cpl -> Enter
