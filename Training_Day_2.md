@@ -10,9 +10,11 @@
 - [2 Triển khai ứng dụng Web](#3-triển-khai-ứng-dụng-web)
   - [2.1 Linux](#21-linux)
     - [2.1.1 Triển khai site wordpress trên LAMP stack](#211-triển-khai-site-wordpress-trên-lamp-stack)
-     - [2.1.2 Triển khai site wordpress trên LAMP stack](#212-triển-khai-site-wordpress-trên-lamp-stack)
-     - [2.1.3 Triển khai site wordpress trên LAMP stack](#213-triển-khai-site-wordpress-trên-lamp-stack)
-     - [2.1.4 Triển khai site wordpress trên LAMP stack](#214-triển-khai-site-wordpress-trên-lamp-stack)
+     - [2.1.2 Triển khai site wordpress trên LAMP stack](#212-triển-khai-site-wordpress-trên-lemp-stack)
+    
+     - [2.1.3 Triển khai site wordpress tách web server, DB server](#214-triển-khai-site-wordpress-tách-web-server-db-server)
+   
+     - [2.1.4 Triển khai site wordpress trên LAMP stack](#213-triển-khai-site-wordpress-trên-lamp-stack)
 ## 1 DNS
 
 ### 1.1 Hệ Thống DNS
@@ -133,8 +135,74 @@ B1: Cài đặt Lamp stack:
 ![image](https://github.com/user-attachments/assets/bce67852-c7e2-4486-b597-37a7624db7ce)
 
 
-  
 
+##### 2.1.2  Triển khai Site Wordpress trên Lemp stack
+- LEMP stack tương tự với LAMP nhưng thay vì APACHE là Nginx.
+  B1: Cài đặt Nginx
+   - Vì đã cài LAMP trước đó nên Mysql,PHP đã có sẵn nên chỉ cần cài thêm nginx,php-fpm(cho riêng nginx)
+
+`
+sudo apt install nginx php-fpm unzip curl -y`
+
+
+  - Tắt APache để tránh xung đột với Ngnix( chung gate 80)
+
+  `sudo systemctl stop apache2`
+
+  `sudo systemctl disable apache2`
+
+  - Khởi chạy ngnix thành công:
+    
+![image](https://github.com/user-attachments/assets/86d93b2c-cc8f-435f-a7ee-4507fe91681a)
+
+  
+  - Vì đã cấu hình Mysql, tải và giải nén Wordpress, chỉnh sửa wp-config.php trước đó nên giờ chỉ cần làm vài bước cáu hình cho LEMP.
+  
+  B2:Cấu Hình Nginx để trỏ đến thư mục Wordpress
+  
+  cấu hình cho file /etc/nginx/sites-available/wordpress:
+ 
+
+`server { `
+
+    listen 80;
+    server_name localhost;
+
+    root /var/www/html/wordpress;
+    index index.php index.html;
+
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+`}`
+
+ B3: Kích hoạt site và reload nginx:
+  
+  `sudo ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/`
+  
+    sudo nginx -t
+    
+    sudo systemctl reload nginx`
+ 
+
+  B4: Truy cập localhost:192.168.80.128 để kiểm tra site:
+  
+  ![image](https://github.com/user-attachments/assets/ce4fe0d3-d329-43d5-bd32-103d9ea13674)
+
+
+  -> Thành công triển khai site wordpress với LEMP stack!
+
+
+#### 2.1.3 Triển khai site wordpress tách Web server, DB server
     
   
  
