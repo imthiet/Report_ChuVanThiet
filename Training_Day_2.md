@@ -45,4 +45,52 @@
 ### 2 Triển khai ứng dụng Web
 #### 2.1 Linux
 ##### 2.1.1  Triển khai Site Wordpress trên Lamp stack
+B1: Cài đặt Lamp stack:
 
+  `sudo apt update`
+  
+  `sudo apt install apache2 mysql-server php php-mysql libapache2-mod-php php-cli unzip curl -y`
+  
+ Đã cài thành công:
+ 
+  ![image](https://github.com/user-attachments/assets/8b441917-e04d-4cc1-8d79-3dd17366c597)
+
+ B2: Vào MySql
+  
+                                    `sudo mysql`
+
+  -Tạo databse và user:
+  `CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+  CREATE USER 'thietquang'@'localhost' IDENTIFIED BY '137203';
+  GRANT ALL PRIVILEGES ON wordpress.* TO 'thietquang'@'localhost';
+  FLUSH PRIVILEGES;
+  EXIT; `
+  - Kiểm tra user và database bằng cách đăng nhập vào `mysql -u thietquang -p` và `SHOW DATABASES`:
+
+  ![image](https://github.com/user-attachments/assets/b1287418-5b5a-4efc-93f7-879a7e7b5f4c)
+  
+  B3: Cài đặt WordPress:
+   - chuyển đến thư mục /tmp
+   - truy vấn và tải theo url: https://wordpress.org/latest.tar.gz
+   - giải nén file đã tải
+   - copy thư mục wordpress vào /var/www/html
+     
+  `cd /tmp
+  curl -O https://wordpress.org/latest.tar.gz
+  tar -xvzf latest.tar.gz
+  sudo cp -a wordpress/. /var/www/html/`
+
+  Thư mục wordpress:
+  
+![image](https://github.com/user-attachments/assets/f69701b5-d676-4428-a44f-43fec303bb1e)
+
+  B4: Cấu hình quyền truy cập
+  
+
+  
+
+    
+  
+ 
+
+  
