@@ -604,7 +604,11 @@ http://localhost/demo1/
   ![image](https://github.com/user-attachments/assets/bbaa5c14-532a-4473-abc8-dab8f3b0afcd)
 
   
-- Kiểm tra hoạt động:
+- Kiểm tra hoạt động với file phpinfo :
+![image](https://github.com/user-attachments/assets/12224693-80c9-498c-96d3-f949de45839f)
+
+chạy http://localhost/demo4/info.php để kiểm tra ->  thành công
+
   
   ![image](https://github.com/user-attachments/assets/a90832cf-99d8-4ccf-a0d6-e101b6f013e7)
 
