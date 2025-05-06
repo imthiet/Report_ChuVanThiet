@@ -75,17 +75,31 @@ B1: Cài đặt Lamp stack:
    - giải nén file đã tải
    - copy thư mục wordpress vào /var/www/html
      
-  `cd /tmp
-  curl -O https://wordpress.org/latest.tar.gz
-  tar -xvzf latest.tar.gz
-  sudo cp -a wordpress/. /var/www/html/`
+  `cd /tmp`
+  
+  `curl -O https://wordpress.org/latest.tar.gz`
+  
+  `tar -xvzf latest.tar.gz`
+  
+  `sudo cp -a wordpress/. /var/www/html/`
 
   Thư mục wordpress:
   
 ![image](https://github.com/user-attachments/assets/f69701b5-d676-4428-a44f-43fec303bb1e)
 
-  B4: Cấu hình quyền truy cập
+  B4: Cấu hình quyền truy cập:
+    - Set quyền
+    - Tìm kiếm các folder và đặt quyền 755 cho chúng trong /var/www/html
+    - Tìm và phân quyền 644 tương tự nhưng là cho các file.
   
+  `sudo chown -R www-data:www-data /var/www/html/`
+  
+  `sudo find /var/www/html/ -type d -exec chmod 755 {} \;`
+  
+  `sudo find /var/www/html/ -type f -exec chmod 644 {} \;`
+
+  
+  B5: Tạo file config cho Wordpress
 
   
 
