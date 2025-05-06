@@ -549,9 +549,10 @@ http://localhost/demo1/
 
 
 - PHP không nằm sẵn trong Windows feature để bật nền cần cài PHP
-  - Tải PHP từ:  https://windows.php.net/download/ (bản Non thread safe)
+  - Tải PHP từ:  https://windows.php.net/download/ (bản thread safe)
 
- ![image](https://github.com/user-attachments/assets/6c78a26d-5fc5-4c56-b74e-0dda7ff7ff7e)
+![image](https://github.com/user-attachments/assets/782b57ca-90af-43cc-b530-b1dcacfe1f8a)
+
 
 
 
@@ -571,17 +572,41 @@ http://localhost/demo1/
     ![image](https://github.com/user-attachments/assets/2785b081-101b-49f5-8b14-a7814fc55fc4)
     
     - Thêm Path C:\php vào và Nhấn OK -> OK!
+    - Kiểm tra bằng `php -v`:
+
+    ![image](https://github.com/user-attachments/assets/36b50c30-387b-411b-8eea-5aaad1aeb0e2)
+
+    
   - Cấu hình IIS để xử lý .php bằng FastCGI
     - Mở cmd -> inetmgr ->Enter
     - Chọn server ở side trái
     - mở handle Mapping
+    
+    ![image](https://github.com/user-attachments/assets/f9a220cd-2e78-421a-8d2e-1905d1eb6dc2)
+
+  
     - Ở khung bên phải -> chọn Add Module Mapping
+
+    ![image](https://github.com/user-attachments/assets/6a3efb3a-5a49-4c35-a5ef-cb33b5666bf9)
+
       - Request path: *.php
       - Module: FastCgiModule
-      - Executable: C:\php\
+      - Executable: C:\php\php-8.4.7-Win32-vs17-x64\php-cgi.exe
       - Name: PHP_via_FASTCGI
     - CLick OK - > YES
   - Kiểm tra FastCGI: mở FastCGI SETTING -> kiểm tra có đường dẫn C:\php\php-cgi.exe. Nếu chưa có thì ADD Aplication
   
+    ![image](https://github.com/user-attachments/assets/a1c8c2c2-cf04-4a00-8d37-d733e048429b)
+
+  
   -Restart IIS: mở cmd quyền admin và chạy   `iisreset `
+  
+  ![image](https://github.com/user-attachments/assets/bbaa5c14-532a-4473-abc8-dab8f3b0afcd)
+
+  
+- Kiểm tra hoạt động:
+  
+  ![image](https://github.com/user-attachments/assets/a90832cf-99d8-4ccf-a0d6-e101b6f013e7)
+
+
 
