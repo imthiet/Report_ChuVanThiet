@@ -7,14 +7,15 @@
   - [1.1 Tìm hiểu về hệ thống DNS](#11-hệ-thống-dns)
   - [1.2 Các loại bản ghi sử dụng trong DNS](#12-các-loại-bản-ghi-trong-dns)
 
-- [2 Triển khai ứng dụng Web](#3-triển-khai-ứng-dụng-web)
+- [2 Triển khai ứng dụng Web](#2-triển-khai-ứng-dụng-web)
   - [2.1 Linux](#21-linux)
     - [2.1.1 Triển khai site wordpress trên LAMP stack](#211-triển-khai-site-wordpress-trên-lamp-stack)
-     - [2.1.2 Triển khai site wordpress trên LAMP stack](#212-triển-khai-site-wordpress-trên-lemp-stack)
+     - [2.1.2 Triển khai site wordpress trên LEMP stack](#212-triển-khai-site-wordpress-trên-lemp-stack)
     
-     - [2.1.3 Triển khai site wordpress tách web server, DB server](#214-triển-khai-site-wordpress-tách-web-server-db-server)
+     - [2.1.3 Triển khai site wordpress tách web server, DB server](#213-triển-khai-site-wordpress-tách-web-server-db-server)
    
-     - [2.1.4 Triển khai site wordpress trên LAMP stack](#213-triển-khai-site-wordpress-trên-lamp-stack)
+     - [2.1.4 Bash Script cài đặt LAMP,LEMP stack](#214-bash-script-cài-đặt-lamp-lemp-stack)
+       
 ## 1 DNS
 
 ### 1.1 Hệ Thống DNS
@@ -46,7 +47,7 @@
 
 ### 2 Triển khai ứng dụng Web
 #### 2.1 Linux
-##### 2.1.1  Triển khai Site Wordpress trên Lamp stack
+##### 2.1.1 Triển khai Site Wordpress trên Lamp stack
 B1: Cài đặt Lamp stack:
 
   `sudo apt update`
@@ -136,7 +137,7 @@ B1: Cài đặt Lamp stack:
 
 
 
-##### 2.1.2  Triển khai Site Wordpress trên Lemp stack
+##### 2.1.2 Triển khai Site Wordpress trên Lemp stack
 - LEMP stack tương tự với LAMP nhưng thay vì APACHE là Nginx.
   B1: Cài đặt Nginx
    - Vì đã cài LAMP trước đó nên Mysql,PHP đã có sẵn nên chỉ cần cài thêm nginx,php-fpm(cho riêng nginx)
@@ -204,7 +205,221 @@ sudo apt install nginx php-fpm unzip curl -y`
 
 #### 2.1.3 Triển khai site wordpress tách Web server, DB server
     
+- Hướng làm: Sử dụng Docker để tạo 2 container riêng biệt:
+  - 1 container chạy Mysql( db server)
+  - 1 container chạy WordPress( web server)
+B1: Cài Docker
+    Chạy lệnh với quyền root
+
+  `apt update `
+
+  ` apt install docker.io docker-compose -y`
+
+  ` systemctl enable docker`
   
- 
+  ` systemctl start docker`
+  
+Cài đặt thành công:
+
+![image](https://github.com/user-attachments/assets/9a3febd2-637d-4d20-aa96-aff6a61500de)
+
+ B2: Tạo file yml cấu hình docker-compose.yml   
+
+  `mkdir wordpress-separated`
+    
+  `cd wordpress-separated`
+  
+  `nano docker-compose.yml`
+  
+
+![image](https://github.com/user-attachments/assets/6e7441b4-dcca-4e91-9fbf-9a0332763a89)
+
+  - Cấu hình file yml vừa tạo:
+
 
   
+```
+version: '3.8'
+services:
+  db:
+    image: mysql:5.7
+    container_name: DB_server
+    restart: always
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: thietquang
+      MYSQL_PASSWORD: 137203
+      MYSQL_ROOT_PASSWORD: 137203
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wp_network
+
+  wordpress:
+    image: wordpress:latest
+    container_name: Web_server
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: thietquang
+      WORDPRESS_DB_PASSWORD: 137203
+    depends_on:
+      - db
+    networks:
+      - wp_network
+
+volumes:
+  db_data:
+
+networks:
+  wp_network:
+```
+
+*Note: dùng bản mysql 5.7 do tính ổn định thường dùng cho wordpress( hoàn toàn có thể dùng bản mới 8.0)
+ - Có thể thấy phiên bản tệp docker: 3.8
+ - Phần service với 2 container cần thiết đã được tạo: db và web. Với đầy đủ thông tin name,image, cài đặt restart nếu lỗi và phần Environment - thông tin theo đúng của mình.
+
+ - Các phần thiết lập Volumn, Netswork: Container db và wordpress cso thể giao tiếp với nhau thông qua mạng này. Tên conatiner( Db_server, Web_server) có thể dùng như tên DNS nội bộ.  
+
+![image](https://github.com/user-attachments/assets/55e577c3-bdfa-452b-aa84-8789fce17e69)
+
+ 
+B3: Chạy ứng dụng với lệnh:
+
+`docker-compose up -d`
+
+Đợi pull và extract các libs
+
+![image](https://github.com/user-attachments/assets/3a9315ba-fbd1-4fd1-92b4-f78c5e6b93af)
+
+Kiểm tra trạng thái với `docker ps` để đảm bảo đã run( wordpress cổng 8080 còn mysql là 3306:
+
+![image](https://github.com/user-attachments/assets/f5ad5f33-b488-4a3b-a89e-575c87f94f0b)
+
+Truy cập vào http://localhost:8080 và kiểm tra trạng thái web:
+
+![image](https://github.com/user-attachments/assets/66c866ea-fd3f-4d8d-8115-00ff2990d77f)
+
+
+Đã thành công khởi chạy site wordpress tách riêng DB và Web.
+
+Lệnh Pause Conatiner trên docker: ` docker pause + container name`
+Sau đó kiểm tra trang thái( status )
+
+![image](https://github.com/user-attachments/assets/0b5293a6-fba1-4f62-a587-2dcd11625004)
+
+
+##### 2.1.4 Bash script cài đặt LAMP,LEMP stack
+
+- Tạo file lamp.sh và lemp.sh, ở đây tôi tạo ở thư mục Desktop:
+  ![image](https://github.com/user-attachments/assets/21688b47-87b5-45ad-9d26-712e4a36d33b)
+  
+- Chỉnh sửa 2 file đó, dùng `nano lamp.sh` và `nano lemp.sh`( lưu ý hiện tại đang ở thư mục chứa 2 file đó là Desktop)
+
+![image](https://github.com/user-attachments/assets/ca0aed66-37dd-4b56-994a-7458db5754b7)
+
+- Bash Script có syntax khá giống với ngôn ngữ PHP.
+  - lamp.sh:
+![image](https://github.com/user-attachments/assets/7a7a9fac-359f-44ed-b7e6-70569a3cfd6d)
+
+Script code:
+
+```
+!/bin/bash
+
+echo "========== Install LAMP Stack (Apache, Mysql, PHP) =========="
+
+# update system
+
+sudo apt update -y && sudo apt upgrade -y
+
+# Install Apache
+
+sudo apt install apache2 -y
+
+# Install Mysql(thiet lap an toan)
+sudo apt install mysql-server -y
+sudo mysql_secure_installation 
+
+# Install PHP and other module
+sudo apt install php libapache2-mode-php php-mysql -y
+
+# start and enable service
+
+sudo systemctl enable apache2
+sudo systemctl enable mysql
+sudo systemctl restart apache2
+
+# Notification
+
+echo "===== LAMP installed ======"
+echo "===== Try: http://localhost"
+
+# create PHP test file 
+echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/info.php > /dev/null
+```
+  -lemp.sh:
+  
+![image](https://github.com/user-attachments/assets/44fabccc-f00b-464d-822f-0a32beb54006)
+
+Code Script:
+
+```
+#!/bin/bash
+
+echo "=== Isntall LEMP stack (Nginx, MySQL, PHP) ==="
+
+# Update
+sudo apt update -y && sudo apt upgrade -y
+
+# Install  Nginx
+sudo apt install nginx -y
+
+# Install  MySQL
+sudo apt install mysql-server -y
+sudo mysql_secure_installation
+
+# Install PHP and other modules
+sudo apt install php-fpm php-mysql -y
+
+# Config Nginx for PHP
+cat <<EOF | sudo tee /etc/nginx/sites-available/default
+server {
+    listen 80 default_server;
+    root /var/www/html;
+    index index.php index.html index.htm;
+
+    server_name _;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    location ~ \.php\$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php$(php -v | grep -oP '\d+\.\d+' | head -1)-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+EOF
+
+# Restart service
+sudo systemctl restart nginx
+sudo systemctl enable nginx
+sudo systemctl enable mysql
+
+echo "=== LEMP installed ==="
+
+echo "Try: http://localhost"
+
+# Craete file test PHP
+echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/info.php > /dev/null
+
+```
+
