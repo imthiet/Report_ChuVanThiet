@@ -130,6 +130,7 @@ B1: Cài đặt Lamp stack:
   ![image](https://github.com/user-attachments/assets/7a8ff2b7-a42d-4908-aa67-f133fdcdc74c)
 
   
+![image](https://github.com/user-attachments/assets/bce67852-c7e2-4486-b597-37a7624db7ce)
 
 
   
