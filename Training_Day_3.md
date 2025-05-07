@@ -338,6 +338,8 @@ sau đó thử chạy lại file ./install.sh thì gặp lỗi:
 ![image](https://github.com/user-attachments/assets/0ea1636e-0563-40bd-983e-98a242f50e09)
 
 
+- Chưa thể fix được lỗi này!
+
 
 ### 1.2 Khởi tạo User Zimbra
 ### 1.3 Thiết lập chính sách về mật khẩu account email
@@ -431,6 +433,55 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
 `localhost:1000/login.wdm`
 
 ![image](https://github.com/user-attachments/assets/bbd90f5c-2272-478e-b414-ab66aa541f90)
+
+- Sau khi đăng nhập thành công:
+
+![image](https://github.com/user-attachments/assets/5215e6db-a644-4bae-b28b-e0a6c0c08f43)
+
+
+- Tạo tài khoản người dùng - EndUser
+
+ - Vào tab Account Manager:
+   
+  ![image](https://github.com/user-attachments/assets/2c97135f-aaa5-44ac-83ad-60732ee2292f)
+
+ - Chọn New :
+   
+  ![image](https://github.com/user-attachments/assets/dee07148-71ff-4327-80bb-f516bde1f39e)
+
+ - Nhập thông tin cho end user account:
+
+![image](https://github.com/user-attachments/assets/064c9752-9748-46ee-8036-455760c0f9ee)
+
+ - Chọn Save And Close trên thanh công cụ -> thành công:
+
+![image](https://github.com/user-attachments/assets/05f43e17-76ad-4a14-bda5-e3cc7ea41dc8)
+
+ - Có thể thấy user vừa được tạo trong account list:
+
+  ![image](https://github.com/user-attachments/assets/971675c6-2c0e-4ac7-809e-70c18a40e3ab)
+
+ - Truy cập vào `localhost:3000` để đăng nhập với Account End USer
+
+  ![image](https://github.com/user-attachments/assets/0dd46954-a69f-4845-a343-49cbd603154c)
+
+ -  Nhập tài khoản -> Sign In
+
+![image](https://github.com/user-attachments/assets/d2856138-2e4d-477a-823a-8f17a6d6d1de)
+
+ - Đăng nhập thành công vào trang cho user:
+
+![image](https://github.com/user-attachments/assets/207f5a34-84c7-41d9-9c0b-8e1fae83e891)
+
+
+
+
+
+ 
+
+ 
+ 
+
 
 
 
