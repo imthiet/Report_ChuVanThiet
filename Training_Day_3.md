@@ -245,7 +245,9 @@ cd zcs-10.1.4_GA_4200000.UBUNTU22_64.20241224171952
 - SAu khi cài xong, ta cần nhập Domain Name( lưu ý bỏ mail. phía trước tên miền)
 
 
-.... Gặp Lỗi và Đang trong quá trình Fix!!!
+
+========= Gặp Lỗi và Đang trong quá trình Fix!!! =========
+
 
 
 ### 1.2 Khởi tạo User Zimbra
