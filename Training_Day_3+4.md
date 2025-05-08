@@ -713,9 +713,101 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
 ![image](https://github.com/user-attachments/assets/e9a73b8d-f26f-4043-96c4-3dcdfabd9687)
 
 
-### 2.7
-### 2.8
-### 2.9
+### 2.7 Phân quyền tài khoản thành admin domain
+
+- Phân quyền thành admin domain khác với admin global, giúp access doamin configuration via Remote Adminstator
+
+B1: Vào tab Account Manager -> Chọn người dùng mình muốn phân quyền -> Edit:
+
+![image](https://github.com/user-attachments/assets/a3778ece-e7c7-4dcb-b7ad-7fba5a872a7e)
+
+B2: Chọn tab Administartive Roles -> Tick vào This Account is a Domain Adminstrator -> Chọn yes để xác nhận -> SAve and close
+
+![image](https://github.com/user-attachments/assets/03733c5d-20c5-4259-b341-3c183487b96b)
+
+
+
+
+### 2.8 Kiểm tra Log gửi/nhận email (important)
+
+Cách 1: Kiểm tra trên chính thư mục C:\MDaemon\Logs
+- Vào thư mục C:\MDaemon/Logs
+- Xem các Log với đầy đủ thông tin:
+  
+![image](https://github.com/user-attachments/assets/5cb3ff00-9c23-475f-801a-d42280a8c8a0)
+
+Cách 2: Kiểm tra trên trang localhost của Admin:
+
+
+![image](https://github.com/user-attachments/assets/48d5c3bb-042e-4447-aadf-d00be37dc9a2)
+
+  - Log file đầy đủ đã xuất hiện:
+    
+![image](https://github.com/user-attachments/assets/fb94cba9-395e-439f-923b-6b05808ed6e1)
+
+  - Các dạng log chính:
+  - 
+  STMP(in).log - nhận mail
+  SMTP(out).log - gửi mail
+  IMAP.log, POP3.log - truy cập từ Client
+  SpamFilter.log, Antivirus.log - lọc spam/virus
+ 
+
+### 2.9 Dynamic Screening trong Security
+
+  - ![image](https://github.com/user-attachments/assets/9e007e31-0b8b-4924-b539-ed50313f0d4b)
+    
+    - Dynamic Screening là một tính năng của SecurityGateway (phần mềm bảo mật email của              MDaemon Technologies) giúp theo dõi hành vi của các máy chủ gửi email để phát hiện hoạt 
+      động đáng ngờ và phản hồi phù hợp.
+      Tính năng này cho phép tạm thời chặn các địa chỉ IP hoặc máy chủ gửi email dựa trên các         hành vi như gửi quá nhiều yêu cầu không hợp lệ, vượt quá số lần kết nối cho phép, hoặc          thất bại trong xác thực.
+      
+    - Các tính năng chính:
+
+      Chặn IP dựa trên lỗi "unknown recipient":
+        Khi một IP gửi quá nhiều lệnh RCPT (recipient) không hợp lệ trong một phiên SMTP (mặc           định là 10 lần), IP đó sẽ bị tạm thời chặn.
+        Đây là chiến thuật phổ biến của spammer nhằm thử gửi email đến nhiều địa chỉ không tồn          tại.
+      
+     Chặn IP dựa trên tần suất kết nối:
+        IP sẽ bị chặn nếu kết nối đến SecurityGateway vượt quá số lần cho phép trong một khoảng         thời gian nhất định (ví dụ: [xx] lần trong [xx] phút).
+        Tính năng này mặc định bị tắt.
+    
+     Chặn IP dựa trên lỗi xác thực:
+        IP sẽ bị tạm thời chặn nếu thất bại trong xác thực (ví dụ: nhập sai mật khẩu) quá số            lần được chỉ định.
+        Giúp ngăn chặn các cuộc tấn công brute-force hoặc dictionary attack.
+    
+     Thời gian chặn tạm thời:
+        Các lệnh cấm không phải vĩnh viễn. IP bị chặn sẽ được tự động bỏ chặn sau một khoảng            thời gian do quản trị viên chỉ định (phút, giờ, hoặc ngày).
+        Danh sách các IP bị chặn và thời gian chặn được hiển thị trong Blocked IP List, nơi             quản trị viên có thể xóa thủ công nếu cần.
+    
+    Miễn trừ cho máy chủ email nội bộ:
+        Theo mặc định, các máy chủ email thuộc miền của bạn được miễn trừ khỏi các hạn chế của          Dynamic Screening.
+        Quản trị viên có thể tắt tùy chọn này nếu muốn áp dụng Dynamic Screening cho cả máy chủ         nội bộ.
+    
+- Cấu hình và quản lý
+        Kích hoạt Dynamic Screening: Tính năng này cần được bật thông qua tùy chọn trong giao           diện quản trị của SecurityGateway.
+  
+   Blocked IP List: Hiển thị danh sách các IP bị chặn cùng thời gian đã trôi qua kể từ khi         bị chặn. Quản trị viên có thể xóa IP khỏi danh sách bằng nút xóa trên thanh công cụ.
+  
+  Tùy chỉnh ngưỡng:
+  
+  Quản trị viên có thể điều chỉnh số lần lỗi RCPT, tần suất kết nối, hoặc số lần thất bại         xác thực trước khi chặn.
+  Thời gian chặn cũng có thể được tùy chỉnh linh hoạt.
+
+- Ứng dụng thực tế:
+  Chống spam: Ngăn chặn các máy chủ gửi email hàng loạt với danh sách địa chỉ không hợp           lệ.
+  
+  Bảo vệ tài khoản: Giảm nguy cơ tài khoản bị xâm phạm thông qua các cuộc tấn công đoán m         ật khẩu.
+  
+  Tăng cường bảo mật: Kết hợp với các tính năng khác như Location Screening để chặn kết           nối từ các khu vực không được phép.
+
+### 2.9 Backup và Restore email
+  
+  1. Backup thủ công:
+    - Backup toàn bộ thư mục: C:\MDaemon\ .Bao gồm các thư mục Users\, Logs\, Queue\, App\ với ổ ngoài, USB,...
+     
+  2. Backup từ giao diện....
+
+     
 
 
 
