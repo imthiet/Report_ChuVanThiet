@@ -17,8 +17,14 @@
     
   - [2.3 Các port cần thiết được sử dụng trong email server Mdaemon](#23-các-port-cần-thiết-được-sử-dụng-trong-email-server-mdaemon)
 
-  - [2.4 Khởi tạo Domain, User, group, Alias, Mailinglists email, Thiết lập...](#24-khởi-tạo-domain-user-group-alias-mailing-lists-email-thiết-lập)
-
+ - [2.4 Khởi tạo Domain, User, group, Alias, Mailing lists mail, Thiết lập theo yêu cầu](#24-khởi-tạo-domain-user-group-alias-mailing-lists-mail-thiết-lập-theo-yêu-cầu)
+ - [2.5 Tìm hiểu về Content Filter: Spam, Antivirus, Attach Filter, Message Filter](#25-tìm-hiểu-về-content-filter-spam-antivirus-attach-filter-message-filter)
+- [2.6 Đổi mật khẩu tài khoản admin](#26-đổi-mật-khẩu-tài-khoản-admin)
+- [2.7 Phân quyền tài khoản thành admin domain](#27-phân-quyền-tài-khoản-thành-admin-domain)
+- [2.8 Kiểm tra Log gửi, nhận email](#28-kiểm-tra-log-gửi-nhận-email)
+- [2.9 Dynamic Screening trong Security](#29-dynamic-screening-trong-security)
+- [2.9 Backup và Restore email](#29-backup-và-restore-email)
+    
 ## Cài đặt Live Server Linux
 - Cài đặt Ubuntu Server bản 22.04.5 thay thế cho bản desktop trước đó.
 - Cấu hình Hardware, Software,...  
@@ -654,17 +660,6 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
     ![image](https://github.com/user-attachments/assets/396f18fe-bfe7-4a61-9973-b44a62e08ca3)
 
 
- 
-  
-
-    
-
-  
-
-    
-
-
-    
 
 
 ### 2.5 Tìm hiểu về Content Filter: Spam, Antivirus, Attach Filter, Message Filter
@@ -728,7 +723,7 @@ B2: Chọn tab Administartive Roles -> Tick vào This Account is a Domain Admins
 
 
 
-### 2.8 Kiểm tra Log gửi/nhận email (important)
+### 2.8 Kiểm tra Log gửi nhận email
 
 Cách 1: Kiểm tra trên chính thư mục C:\MDaemon\Logs
 - Vào thư mục C:\MDaemon/Logs
