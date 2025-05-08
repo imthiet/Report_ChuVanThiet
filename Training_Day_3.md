@@ -15,7 +15,9 @@
     
   - [2.2 Truy Cập Admin và EndUser](#22-truy-cập-admin-và-enduser)
     
+  - [2.3 Các port cần thiết được sử dụng trong email server Mdaemon](#23-các-port-cần-thiết-được-sử-dụng-trong-email-server-mdaemon)
 
+  - [2.4 Khởi tạo Domain, User, group, Alias, Mailinglists email](#24-khởi-tạo-domain-user-group-alias-mailing-lists-email)
 
 ## Cài đặt Live Server Linux
 - Cài đặt Ubuntu Server bản 22.04.5 thay thế cho bản desktop trước đó.
@@ -473,6 +475,166 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
 
 ![image](https://github.com/user-attachments/assets/207f5a34-84c7-41d9-9c0b-8e1fae83e891)
 
+
+### 2.3 Các port cần thiết được sử dụng trong email server Mdaemon
+
+- Gửi và nhận Email:
+  
+  SMTP             port 25    TCP    Gửi email giữa các máy chủ  
+  SMTP overSSL     port 465   TCP    Gửi email bảo mật
+  SMTP Submission  port 587   TCP    Gửi email từ client đến server(Outlook, Thunderbird,...)
+  POP3             port 110   TCP    Tải email về từ Server
+  POP3 over SSL    port 995   TCP    Tải email bảo mật
+  IMAP             port 143   TCP    ĐỒng bộ email từ nhiều thiết bị
+  IMAP over SSL    port 993   TCP    Đồng bộ email bảo mật   
+
+
+- Giao diện webmail & quản trị
+
+  Webmail(HTTP)    port 3000  TCP    Gaio diện người dùng access email qua trình duyệt(!secure)
+  Webmail(HTTPS)   port 443   TCP    gaio diện người dùng(bảo mật SSl,TLS)
+  Webadmin(HTTP)   port 1000  TCP    Quản trị server qua trình duyệt
+  Remote Admin     port 1443  TCP    Quản trị từ xa(SSL bảo mật)
+
+- Đồng bộ hóa với thiết bị di động/ dịch vụ nâng cao
+  
+  ActiveSync      port 80/443  TCP  Đồng bộ email, lịch, danh bạ với phone
+  CalDAV          port 8008    TCP  Calendar cho clinet như thunderbird
+  CARDAV          port 8843    TCP  ĐỒng bộ danh bạ
+  LDAP            port 389     TCP  Dịch vụ danh bạ nội bộ( nếu enable)
+  Minger          port 118     TCP  Kiểm tra trạng thái user giữa nhiều MDaemon server
+
+- Bảo mật & lọc thư rác
+  
+  Spam Filter          Nội bộ    Không cần mở port, dùng nội bộ
+  Antiviruss Engine    Nội bộ    Được bậy sẵn - không cần cấu hình riêng
+  Content Filter       Nội bộ    THiết lập từ giao diện quản trị
+
+
+- Tối thiểu cần mở nếu dùng trong môi trường thực tế(Internet)
+  - SMTP(25)
+  - SMTP Submission(587)
+  - IMAP(143 hoặc 993)
+  - Webmail(443)
+  - Remote Admin(1443) - nếu cần cấu hình từ xa   
+### 2.4 Khởi tạo Domain, User, group, Alias, Mailing lists mail,.... Thiết lập theo yêu cầu
+- User
+  
+    B1: ở MDaemon Configuration, Chọn Domain manager:
+    
+    ![image](https://github.com/user-attachments/assets/ff1af831-45ab-49d0-9695-165e3b2135c4)
+    
+    B2: Trong Domain Manager, Nhấn New -> Hiện ra bảng config cho domain:
+    
+    ![image](https://github.com/user-attachments/assets/87a139db-467a-41a9-9c20-7464e01be700)
+    
+    
+    B3: Nhập tên Domain( vd ở đây là mail.testdomain.com) -> Save and close 
+    
+    ![image](https://github.com/user-attachments/assets/ca1fa166-66b5-4d1f-b29a-3717c9157c90)
+    
+    Thông báo thành công và có thể thấy domain vừa tạo trong domain list:
+    
+    ![image](https://github.com/user-attachments/assets/900e2f44-1215-4060-9c83-73be2030cfec)
+    
+    
+    ![image](https://github.com/user-attachments/assets/cce16ea4-f801-4457-b02c-aa2aa1660d0a)
+
+- Tạo user:
+  
+    B1: Vào tab Account Manager
+
+    ![image](https://github.com/user-attachments/assets/0da4f17d-d5bf-462c-ae9f-2c00a8ab3cc8)
+
+
+    B2: Click New -> nhập thông tin:tên, email, password
+    
+    ![image](https://github.com/user-attachments/assets/2406ec7d-bd3a-4735-9e37-8f063a23ad4c)
+
+    B3: Nhấn Save And CLose để lưu và kiểm tra kết quả:
+
+    ![image](https://github.com/user-attachments/assets/5040f0ff-6576-4007-a70a-fd628dae1b3e)
+  
+
+- Tạo Group( nhóm user)
+    
+    B1: Nhấn vào Tab Group sau đo bấm New:
+    
+    ![image](https://github.com/user-attachments/assets/11f5c751-40a0-4170-ad7d-adc998cba5b8)
+
+    B2: Màn hình config hiện ra, nhập thông tin group -> Save and Close:
+
+    ![image](https://github.com/user-attachments/assets/12de099f-a054-4360-839f-4c402177e756)
+
+    B3: Thêm Member vào group, nhấn vào group trong list, chọn edit membership, tiếp theo là        tích chọn vào các user muốn thêm -> nhấn Close:
+
+    ![image](https://github.com/user-attachments/assets/6555ded6-7241-4dcf-8efa-2cfabc6a87c3)
+
+- Tạo Alias( bí danh email)
+    
+    B1: Vào tab Aliases -> New
+    
+    ![image](https://github.com/user-attachments/assets/38b7afaf-d6b4-44a9-936d-745cc2bc380d)
+
+    
+    B2: Nhập tên Alias( bí danh) -> Nhập tên email thật( Actual email) -> Save and Close
+
+    
+    ![image](https://github.com/user-attachments/assets/faca0f04-7697-4de4-8f68-ff46e141f05a)
+
+
+    B3: Kiểm tra lại kết quả
+
+    ![image](https://github.com/user-attachments/assets/a2a55bf5-61f1-4193-bc57-8b52615880a7)
+  
+- Tạo Mailing lists(danh sách gửi thư)
+    
+    B1: Vào tab Mail List manager -> Chọn New
+    
+    ![image](https://github.com/user-attachments/assets/f86198f2-24ad-4601-8ebd-5d8b0962d6d5)
+
+    B2: Tương tự là nhập tên list và description -> Save and close:
+
+    ![image](https://github.com/user-attachments/assets/b19a1ae3-b3fb-4b2b-bb22-2c796c36dee7)
+
+    B3: Thêm member cho list: Nhấn vào list muốn thêm -> Edit -> New -> Nhập Email muốn add->       Save And close
+
+    ![image](https://github.com/user-attachments/assets/7e01d5fa-7203-4d30-b815-8954a1e7e39c)
+
+    B4: Kiểm tra lại danh sách member của list -> đã thành công:
+
+    ![image](https://github.com/user-attachments/assets/e6143228-417c-400e-bdde-7bba9ede26a6)
+
+    
+- Thiết lập chính sách mật khẩu:
+    
+    B1: Vào tab Setup, Chọn Vào Enable Strong Passwrod trong mục Password:
+    
+    ![image](https://github.com/user-attachments/assets/2ad9fe2b-a59c-47a8-a381-f0d2ec55f19d)
+
+    
+    B2: Chỉnh sửa theo ý rồi nhấn Save:
+
+    ![image](https://github.com/user-attachments/assets/53ef8267-32c7-4dbc-9449-96f0e219d8ce)
+
+- Thiết lập chữ kí Email:
+
+    
+
+
+
+
+  
+
+    
+
+
+    
+
+
+### 2.5 Thiết lập chính sách mật khẩu
+### 2.4 Khởi tạo Domain, User, group, Alias, Mailing lists mail
+### 2.4 Khởi tạo Domain, User, group, Alias, Mailing lists mail
 
 
 
