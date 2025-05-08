@@ -17,7 +17,7 @@
     
   - [2.3 Các port cần thiết được sử dụng trong email server Mdaemon](#23-các-port-cần-thiết-được-sử-dụng-trong-email-server-mdaemon)
 
-  - [2.4 Khởi tạo Domain, User, group, Alias, Mailinglists email](#24-khởi-tạo-domain-user-group-alias-mailing-lists-email)
+  - [2.4 Khởi tạo Domain, User, group, Alias, Mailinglists email, Thiết lập...](#24-khởi-tạo-domain-user-group-alias-mailing-lists-email-thiết-lập)
 
 ## Cài đặt Live Server Linux
 - Cài đặt Ubuntu Server bản 22.04.5 thay thế cho bản desktop trước đó.
@@ -519,7 +519,7 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
   - Remote Admin(1443) - nếu cần cấu hình từ xa   
 ### 2.4 Khởi tạo Domain, User, group, Alias, Mailing lists mail,.... Thiết lập theo yêu cầu
 
-- User
+- **User**
   
     B1: ở MDaemon Configuration, Chọn Domain manager:
     
@@ -542,7 +542,7 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
     ![image](https://github.com/user-attachments/assets/cce16ea4-f801-4457-b02c-aa2aa1660d0a)
 
 
-- Tạo user:
+- **Tạo user**:
 
   
     B1: Vào tab Account Manager
@@ -559,7 +559,7 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
     ![image](https://github.com/user-attachments/assets/5040f0ff-6576-4007-a70a-fd628dae1b3e)
   
 
-- Tạo Group( nhóm user)
+- **Tạo Group( nhóm user)**
   
     
     B1: Nhấn vào Tab Group sau đo bấm New:
@@ -574,7 +574,7 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
 
     ![image](https://github.com/user-attachments/assets/6555ded6-7241-4dcf-8efa-2cfabc6a87c3)
 
-- Tạo Alias( bí danh email)
+- **Tạo Alias( bí danh email)**
     
     B1: Vào tab Aliases -> New
     
@@ -593,7 +593,7 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
 
 
   
-- Tạo Mailing lists(danh sách gửi thư)
+- **Tạo Mailing lists(danh sách gửi thư)**
 
     
     B1: Vào tab Mail List manager -> Chọn New
@@ -613,7 +613,7 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
     ![image](https://github.com/user-attachments/assets/e6143228-417c-400e-bdde-7bba9ede26a6)
 
     
-- Thiết lập chính sách mật khẩu:
+- **Thiết lập chính sách mật khẩu:**
   
     
     B1: Vào tab Setup, Chọn Vào Enable Strong Passwrod trong mục Password:
@@ -627,12 +627,37 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
 
 
 
-- Thiết lập chữ kí Email:
-
+- **Thiết lập chữ kí Email:**
     
 
+    B1: Vào tab Account Manager -> Chọn tài khoản cần thiết lập chữ kí -> EDIT
+    
+    ![image](https://github.com/user-attachments/assets/6510cf80-7dd3-4de9-ad88-61ebe784311e)
+
+    B2: Tab Account Setting hiện ra -> Signature:
+
+    ![image](https://github.com/user-attachments/assets/74264fbb-ab0f-48b1-9bcf-8940c311b60a)
+
+    B3: Nhập Signature vào text-area và Save and Close:
+
+    ![image](https://github.com/user-attachments/assets/e80ef4f6-3199-43a2-84b6-fe599864a57c)
 
 
+- **Thiết lập forward mail:**
+
+    B1: Chọn tab Account Manager -> chọn tài khaonr rồi nhấn EDIT:
+    
+    ![image](https://github.com/user-attachments/assets/75d44ed1-70d3-4f43-be53-30a4cbe2a84d)
+
+    B2: Chọn forwarding -> Tick vào enable mail forwarding -> nhập email adress -> domain,... -      > Save and close
+    
+    ![image](https://github.com/user-attachments/assets/396f18fe-bfe7-4a61-9973-b44a62e08ca3)
+
+
+ 
+  
+
+    
 
   
 
@@ -642,8 +667,55 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
     
 
 
+### 2.5 Tìm hiểu về Content Filter: Spam, Antivirus, Attach Filter, Message Filter
 
-### 2.4 Khởi tạo Domain, User, group, Alias, Mailing lists mail
+  #### 1. Spam filter
+   - Nhìn chung đây là các chức năng để lọc Content cho Mail tránh mail Rác và Spam.
+   - Bật Spam filter:
+      B1: vào Tab Security -> Content Filter -> Tích vào Enable Content Filter rule processing        engine. Có thể tùy chỉnh các rule sẵn có
+      
+      ![image](https://github.com/user-attachments/assets/172bd953-7fd1-4d63-b481-8760fd9bbd61)
+      
+      B2: Nhấn New để thêm Rule mới -> thêm Rule Name -> tùy chọn Condition và Action khi gặp         mail spam -> SAve and Close:
+
+      ![image](https://github.com/user-attachments/assets/507e29a5-537a-4f73-ab70-33542309ef78)
+ 
+      
+  #### 2. Antivirus
+   - Đây là chức năng phòng chống Virus qua mail.
+    B1: vào tab Security -> Antivirus -> Có thể tích chọn để Enable các chức năng tùy ý:
+
+  ![image](https://github.com/user-attachments/assets/2d8108c9-4f1d-4500-9bb0-a03ac5e7e60f)
+    
+  B2: Nhấn Save để lưu cài đặt
+
+  ![image](https://github.com/user-attachments/assets/de80a891-4918-4742-aa43-c361e43cfe8f)
+
+
+  #### 3. Attach FIlters
+  - Lọc tệp đính kèm trong mail
+  B1: Vào tab Security -> content filter -> Attchments -> thiết lập các cài đặt tùy ý -> Save
+    ![image](https://github.com/user-attachments/assets/0b26412c-201e-4892-93c5-fd034adc1cdd)
+
+  #### 4. Message Filter
+  - Lọc nội dung mail theo rule tùy ý.
+  - Phần này tương tự với Spam Filter
+  
+
+
+### 2.6 Đổi mật khẩu tài khoản admin
+  B1: Vào account manager -> chọn tài khoản admin -> Edit -> Account Details -> thay đổi mật khẩu và Save
+  
+![image](https://github.com/user-attachments/assets/c375c043-df14-4eea-b54c-acacc2cc9546)
+
+  -  Nếu tài khoản Admin cần đổi mật khẩu là tài khoản hiện tại thì: My Account -> Account Retail -> tiến hành đổi mật khẩu và Save như thường.
+
+![image](https://github.com/user-attachments/assets/e9a73b8d-f26f-4043-96c4-3dcdfabd9687)
+
+
+### 2.7
+### 2.8
+### 2.9
 
 
 
