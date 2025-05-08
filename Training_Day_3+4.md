@@ -1,4 +1,4 @@
-# Công ty Nhân Hòa - Kế hoạch đào tạo 7 ngày (Ngày 3 Mục 16-17)
+# Công ty Nhân Hòa - Kế hoạch đào tạo 7 ngày (Ngày 3+4 Mục 16-17)
 
 ## Mục lục
 - [Cài đặt Linux Live Server thay cho bản desktop hiện tại](#cài-đặt-live-server-linux)
@@ -518,6 +518,7 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
   - Webmail(443)
   - Remote Admin(1443) - nếu cần cấu hình từ xa   
 ### 2.4 Khởi tạo Domain, User, group, Alias, Mailing lists mail,.... Thiết lập theo yêu cầu
+
 - User
   
     B1: ở MDaemon Configuration, Chọn Domain manager:
@@ -540,7 +541,9 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
     
     ![image](https://github.com/user-attachments/assets/cce16ea4-f801-4457-b02c-aa2aa1660d0a)
 
+
 - Tạo user:
+
   
     B1: Vào tab Account Manager
 
@@ -557,6 +560,7 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
   
 
 - Tạo Group( nhóm user)
+  
     
     B1: Nhấn vào Tab Group sau đo bấm New:
     
@@ -586,8 +590,11 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
     B3: Kiểm tra lại kết quả
 
     ![image](https://github.com/user-attachments/assets/a2a55bf5-61f1-4193-bc57-8b52615880a7)
+
+
   
 - Tạo Mailing lists(danh sách gửi thư)
+
     
     B1: Vào tab Mail List manager -> Chọn New
     
@@ -607,6 +614,7 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
 
     
 - Thiết lập chính sách mật khẩu:
+  
     
     B1: Vào tab Setup, Chọn Vào Enable Strong Passwrod trong mục Password:
     
@@ -616,6 +624,8 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
     B2: Chỉnh sửa theo ý rồi nhấn Save:
 
     ![image](https://github.com/user-attachments/assets/53ef8267-32c7-4dbc-9449-96f0e219d8ce)
+
+
 
 - Thiết lập chữ kí Email:
 
@@ -632,8 +642,7 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
     
 
 
-### 2.5 Thiết lập chính sách mật khẩu
-### 2.4 Khởi tạo Domain, User, group, Alias, Mailing lists mail
+
 ### 2.4 Khởi tạo Domain, User, group, Alias, Mailing lists mail
 
 
