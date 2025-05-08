@@ -466,9 +466,38 @@ sudo systemctl start node_exporter
 
 
 - [5 Đưa biểu đồ lên kết hợp với grafana](#5-đưa-biểu-đồ-lên-kết-hợp-với-grafana)
-  
 
+  B1: Truy cập vào grafana (`locahost:192.168.80.134:3000)
+  -> Create New DashBoard:
+  
+  ![image](https://github.com/user-attachments/assets/b5ada2ee-8bca-412a-9282-5b35695625f3)
+
+  B2: Chọn Add visualization
+
+  ![image](https://github.com/user-attachments/assets/6d2db428-dc31-4c21-93e9-93ca59b738af)
+
+
+  B3: Chọn soure: Prometheus
+  B4: Thêm Query vào Promt này và nhấn run query:
+  
+  ![image](https://github.com/user-attachments/assets/2814f460-a32d-4932-9bea-bdefb70fdc17)
+  
+  
+  B5: Thêm các câu lệnh để hiển thị CPU %, Mysql,... cùng 1 lúc:
+  
+  ![image](https://github.com/user-attachments/assets/c6242886-a41c-49d1-a13f-70e237110a3e)
+
+
+  -> Kết Quả:
+
+  ![image](https://github.com/user-attachments/assets/3e734d46-0a24-4d0c-bb51-14e39acd6691)
+
+ 
+
+  
+```
 ## 1 Cài đặt Prometheus, Grafana trên Ubuntu 22.04
 
 
 ### 1.1 Cài đặt email server Zimbra trên Ubuntu 22.04
+```
