@@ -43,7 +43,14 @@ Chiến lược: Phát triển bền vững, nền tảng văn hoá với con ng
 Nội dung văn hóa...
 ### 1.3 Nội quy cách tương tác, làm việc, báo cáo trao đổi email khi làm việc
 
-Nội quy,....
+Nội quy :
+  - Chấm công vào làm từ 8h(có thể tối đa 8h05). Check out là 17h30( riêng thứ 7 là 16h45 ).
+  - Chấm công muộn không quá 2 lần/1thangs để được tính lương
+  - Một tháng có 7 ngày nghỉ phép tính lương( 4 chủ nhật - 2 thứ 7 - 1 ngày tự chọn)
+  - Trường hợp đi muộn, nghỉ phép, về sớm cần tạo đơn trên Bitrix
+  - Tuân thủ quy định 5s: sạch sẽ, sẵn sàng , sàng lọc, sắp xếp, săn sóc
+  - Có tinh thaanhf trách nhiệm, quy củ với công việc. Tôn trọng công ty, đồng nghiệp, cấp lãnh     đạo.
+  
 
 ### Dịch vụ
 - Tên miền
