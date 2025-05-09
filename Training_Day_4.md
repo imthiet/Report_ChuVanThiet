@@ -495,9 +495,3 @@ sudo systemctl start node_exporter
  
 
   
-```
-## 1 Cài đặt Prometheus, Grafana trên Ubuntu 22.04
-
-
-### 1.1 Cài đặt email server Zimbra trên Ubuntu 22.04
-```
