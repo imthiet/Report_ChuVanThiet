@@ -9,6 +9,17 @@
 
 - [2 Kết nối NFS CLient với NFS server](#2-kết-nối-nfs-client-với-nfs-server)
 
+- [3 LVM](#3-lvm)
+  - [3.1 Tạo physical volume](#31-tạo-physical-volume)
+  - [3.2 Tạo Volume group](#32-tạo-volume-group)
+  - [3.3 Tạo logical volume](#33-tạo-logical-volume)
+  - [3.4 Tạo filesystem trên logical volume](#34-tạo-filesystem-trên-logical-volume)
+  - [3.5 Chỉnh sửa fstab để tự động mount phân vùng](#35-chỉnh-sửa-fstab-để-tự-động-mount-phân-vùng)
+  - [3.6 Mở rộng logical volume](#36-mở-rộng-logical-volume)
+  - [3.7 Thêm ổ cứng mở rộng logical volume](#37-thêm-ổ-cứng-mở-rộng-logical-volume)
+  - [3.8 Out/thay thế 1 ổ cứng ra khỏi hệ thống LVM](#38-out-thay-thế-1-ổ-cứng-ra-khỏi-hệ-thống-LVM)
+  - [3.9 Xóa logical volume, xóa volume group, xóa physical volume](#39-xóa-logical-volum-xóa-volume-group-xóa-physical-volume)
+  - 
 ### 1 Tìm hiểu về NFS server
 
 - Tổng quan về NFS - Net Work File System.
@@ -135,6 +146,217 @@ touch test.txt
 -> Thành công với NFS server!
 
 
+
+### 3 LVM
+
+- LVM- Logical Volume Manaager là công nghệ quản lý ổ đĩa linh hoạt trong Linux, cho phép bạn dễ dàng:
+
+  -Gộp nhiều ổ đĩa vật lý thành một ổ lớn (volume group)
+
+  -Tạo ổ đĩa ảo (logical volume – LV) trên đó
+
+  -Mở rộng hoặc thu nhỏ dung lượng ổ đĩa khi cần, mà không cần format lại
+
+  -Di chuyển dữ liệu giữa các ổ vật lý mà không ngắt dịch vụ
+
+
+- Cấu trúc cảu LVM gồm 3 lớp:
+  
+  - Tầng 1: PV- Physical Volume    Ổ đãi thật hoặc phân vùng
+  - Tầng 2: VG- Volume Group       Gộp lại nhiều PV thành 1 khổi
+  - Tầng 3: LV- Logical Volume     "Ổ đĩa ảo" dùng để mount, chứa dữ liệu
+
+- Ưu điểm của LVM:
+  
+  - Mở rộng linh hoạt mà không mất dữ liệu
+  - Snapshot(sao lưu nhanh)
+  - Gộp nhiều ở lại làm một
+  - Di chuyển dữ liệu giữa các ở dễ dàng
+
+
+#### 3.1 Tạo physical volume
+
+
+
+B1: Cài gói LVM ( hoặc cũng không cần vì nó có sẵn rồi)
+
+```
+sudo apt update
+sudo apt install lvm2 -y
+
+```
+
+
+![image](https://github.com/user-attachments/assets/1e31b400-55fc-4f5d-a462-022d1316918e)
+
+B2: Kiểm tra ở đĩa hiện có với `lsblk`
+
+![image](https://github.com/user-attachments/assets/8ac8355e-112d-4398-9750-8d81cb196f33)
+
+
+- Vì không có ổ đĩa phụ để sử dụng nên cần giải lập một ở đĩa mới bằng cách tạo ra một file và dùng nó như một ở đĩa ảo để Lab.
+
+B3: Tạo ổ đĩa ảo từ file và dùng nó với LVM
+
+- Tạo file ảo đại diện cho ổ đĩa: tạo file disk1.img - 3GB (count = 3072)
+
+`sudo dd if=/dev/zero of=/root/disk1.img bs=1M count=3072`
+
+![image](https://github.com/user-attachments/assets/79c944e2-ad06-44e5-8d38-79e689279a39)
+
+
+
+- Gán file đó thành mooth thiết bị loop:
+
+`sudo losetup /dev/loop10 /root/disk1.img`
+
+Note: /dev/loop10 sẽ hoạt động như một ở đĩa thật
+Kiểm tra với `lsblk` để xem có thấy hay không:
+
+      
+![image](https://github.com/user-attachments/assets/bc3831a4-cfef-492a-91db-6f6573381331)
+
+-> đã thấy loop10
+
+- Tạo physical Volume(PV) từ thiết bị đó
+
+`sudo pvcreate /dev/loop10 `
+
+![image](https://github.com/user-attachments/assets/925eb414-a325-4928-a1be-c2a5f3aa4a49)
+
+
+- Kiểm tra PV đã tạo: `sudo pvs`
+
+
+![image](https://github.com/user-attachments/assets/8d7ad32a-2a0f-4dfc-845d-aea36db385ac)
+
+
+#### 3.2 Tạo volume group
+
+Command: `sudo vgcreate my-vg /dev/loop10`
+
+
+![image](https://github.com/user-attachments/assets/31759cd7-f5c4-4e4f-a047-bcf541879a93)
+
+#### 3.3 Tạo Logical Volume
+
+Command:  `sudo lvcreate -L 500M -n my-lv my-vg`
+
+![image](https://github.com/user-attachments/assets/0d9b52de-bb1d-4d03-8e67-8d36e8a33401)
+
+
+#### 3.4 Tạo filesystem trên logical volume
+
+`sudo mkfs.ext4 /dev/my-vg/my-lv
+`
+my-vg là tên Volume group đã tạo, my-lv là tên logical volume đã tạo ở trên.
+
+ ![image](https://github.com/user-attachments/assets/83d3a55f-5f85-48e1-ae3c-af4f23c430ee)
+
+
+#### 3.5 Mount logical volume và chỉnh sửa fsatb để tự động mount
+
+B1: Tạo thư mục mount point:
+
+`sudo mkdir /mnt/lvm-test`
+
+B2: Mount thủ công
+
+`sudo mount /dev/my-vg/my-lv /mnt/lvm-test`
+
+
+![image](https://github.com/user-attachments/assets/192ae278-d8f0-42e1-85ce-a9704f8e14a7)
+
+
+B3: Thêm vào /etc/fstab
+
+`sudo nano /etc/fstab`
+
+B4: Thêm dòng command này vào cuối file -> lưu lại
+
+`/dev/my-vg/my-lv   /mnt/lvm-test   ext4    defaults   0   0`
+
+![image](https://github.com/user-attachments/assets/fdc57771-33fe-4af6-adbf-3648dcb163ae)
+
+
+
+B5: Kiểm tra bằng sudo mount -a:
+
+![image](https://github.com/user-attachments/assets/2ecbb1d7-8912-47c0-ae31-53c53f5eb717)
+
+-> Không có lỗi -> thành công!
+
+
+
+
+
+#### 3.6 Mở rộng logical volume
+
+- Tăng kích thước cho ổ Logical Voume( + 2GB)
+
+`sudo lvextend -L +2G /dev/my-vg/my-lv`
+
+![image](https://github.com/user-attachments/assets/98a68175-d588-4193-a480-37c220eb4afe)
+
+
+- Mở rộng hệ thống tập tin(EXT4)
+
+`sudo resize2fs /dev/my-vg/my-lv`
+
+![image](https://github.com/user-attachments/assets/93869b9e-42fa-466c-9248-27a08cbb59ba)
+
+
+
+#### 3.7 Thêm ở cứng mới để mở rộng logical volume
+
+- Tận dụng dung lượng trống chưa sử dụng trên ổ đĩa /dev/sda để làm.
+`lsblk`
+
+![image](https://github.com/user-attachments/assets/a5658592-5e91-4e0a-bde5-d18e74c1d6c5)
+
+B1: Tạo phân vùng mới từ dung lượng trống trên /dev/sda
+- Dùng `fdisk` để tạo phân vùng mới:
+
+  `sudo fdisk /dev/sda`
+
+![image](https://github.com/user-attachments/assets/0860b923-2fc8-4b43-b6f0-09bf50c40d8b)
+
+
+- Trong giao diện `fdisk` làm theo các bước:
+
+  Nhấn n -> Enter để tạo phân vùng mới.
+  
+  Nhấn Enter tiếp để chọn default cho các option. -> Thành công tạo phân vùng mới với type là     Linux File System
+  
+  Nhấn `w` để thoát
+  
+  B2: Quét lại bảng phân vùng
+
+  `sudo partprobe`
+
+  ![image](https://github.com/user-attachments/assets/eeb86632-3c98-4931-aa3d-8d5e55e04cc2)
+  
+  B3: Tạo Physical Volume từ phân vùng mới( ở đây là /dev/sda4)
+  
+  ![image](https://github.com/user-attachments/assets/3bbc5b17-eb3d-4aad-8ce3-25e8d103797e)
+  
+  `sudo pvcreate /dev/sda4`
+  
+  Đến đây gặp lỗi:
+  ![image](https://github.com/user-attachments/assets/0f4dea8b-0868-4ecd-81db-79a83a3a91f2)
+  
+  -Giải pháp được đưa ra là: Thêm 1 ổ cứng 10GB vào máy ảo 
+
+  ![image](https://github.com/user-attachments/assets/101c15ae-4f12-4b60-aeb0-7b8b508b4b31)
+  
+
+  Sau khi thêm ta làm bước tiếp theo.
+
+
+  B4: Kiểm tra lại ở cứng mới trên máy
+
+#### 3.8 Tạo filesystem trên logical volume
+#### 3.9 Tạo filesystem trên logical volume
 
 
 
