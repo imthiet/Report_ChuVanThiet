@@ -1,5 +1,5 @@
 
-# Công ty Nhân Hòa - Kế hoạch đào tạo 7 ngày (Ngày 5 Mục 19-20)
+# Công ty Nhân Hòa - Kế hoạch đào tạo 7 ngày (Ngày 5a Mục 19-20)
 
 ## Mục lục
 ### NFS Server
