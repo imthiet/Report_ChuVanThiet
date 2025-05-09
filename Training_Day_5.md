@@ -353,10 +353,140 @@ B1: Tạo phân vùng mới từ dung lượng trống trên /dev/sda
   Sau khi thêm ta làm bước tiếp theo.
 
 
-  B4: Kiểm tra lại ở cứng mới trên máy
+  B4: Kiểm tra lại ở cứng mới trên máy bằng `lsblk`:
+    - Thấy một ổ sdb đã đucợ thêm vào.
+  ![image](https://github.com/user-attachments/assets/7edaef44-86e4-4445-92df-3a25836deecd)
 
-#### 3.8 Tạo filesystem trên logical volume
-#### 3.9 Tạo filesystem trên logical volume
+  B5: tạo physical Volume(PV)
+  
+  - Với ổ mới là /dev/sdb: `pvcreate /dev/sdb`
+  
+  ![image](https://github.com/user-attachments/assets/d3b400e6-af43-4120-8179-f00c65951101)
+
+  - Vẫn lỗi nên tạo một ở harđík mới thêm vào từ bên ngoài và thiết lập lại từ đầu, với các       bước tương tự như trên:
+
+  ![image](https://github.com/user-attachments/assets/ab6eb0bc-d779-4186-ad09-eb1c446076e5)
+
+  
+  B6: mở rộng Logical Volume
+  - Mở rộng mylv  thêm 2GB
+    
+  ```
+  sudo lvextend -L +2G /dev/my-vg/mylv
+  sudo resize2fs /dev/my-vg/mylv
+
+    ```
+  - Thành công mở rộng từ 5Gb lên 7GB:
+
+  ![image](https://github.com/user-attachments/assets/17feab32-3cb9-4773-9bc3-efb3973bc5a0)
+
+
+  B7: Thay thế hoặc xóa ổ cứng khỏi LVM
+  
+  - Ta sẽ thay thế /dev/sdb bằng 1 ổ cứng khác để chứa dữ liệu
+  - Tương tự như trên, ta sẽ thêm 1 ổ cứng mới vào máy ảo.
+  - sau đó dùng lệnh `lsblk` để kiểm tra ở mới
+  ![image](https://github.com/user-attachments/assets/0893b283-5b2d-4404-bd1a-22d486337b66)
+
+  - Tạo physical volume từ ở `sdc` mới:
+  
+  `sudo pvcreate /dev/sdc `
+  
+  ![image](https://github.com/user-attachments/assets/5b11b659-ac33-4c27-a8a5-0658e257b199)
+
+  
+  - Thêm vào volume group `my-vg`
+  
+  `sudo vgextend my-vg /dev/sdc`
+  
+  ![image](https://github.com/user-attachments/assets/bfff2e6d-db58-423b-9271-6376d162265a)
+
+  - Di chuyển dữ liệu khỏi `/dev/sdb`
+  
+  `sudo pvmove /dev/sdb`
+  Không hiểu sao vẫn lỗi:
+  ![image](https://github.com/user-attachments/assets/91c512ff-4c99-498e-b515-338bb14d5c2c)
+
+  - Đã tìm ra nguyên nhân: Do ổ mới có dung lượng thấp hơn ở cũ sdb nên xảy ra xung đột đó.
+  - Đã thêm 1 ổ với dung lượng phù hơp `sdd`:
+
+  ![image](https://github.com/user-attachments/assets/3f30afec-9738-49d6-b18e-ff93f3104dc3)
+
+  - LÀm các bước như tạo Pv, thêm vào group, di chuyển dữ liệu:
+  ![image](https://github.com/user-attachments/assets/fcc9b040-0bd7-48db-8f76-e27b8ad48c4c)
+
+    
+  - Gỡ bỏ `sdb` ra khỏi volume group:
+    
+  `sudo vgreduce my-vg /dev/sdb`
+
+  ![image](https://github.com/user-attachments/assets/57870fc1-70b3-4be3-a927-2391b2645b18)
+
+  
+  - Xóa physical volume `sdb`
+  
+    `sudo pvremove /dev/sdb`
+    
+  ![image](https://github.com/user-attachments/assets/a2451e5b-912a-4ad2-9129-d3c8114ebd44)
+
+  >>> Xóa Logical volume và volume group đang chứa trong my-vg
+
+  - Gỡ mount nếu đang được sử dụng:
+
+  `sudo umount /dev/my-vg/mylv
+  
+  ![image](https://github.com/user-attachments/assets/c22d2155-aa51-492f-a5cb-30a5b187a9ee)
+
+
+  - Xóa Logical Volume:
+  
+  `sudo lvremove /dev/my-vg/mylv`
+
+  - Xóa Volume Group:
+
+  `sudo vgremove my-vg`
+
+  ![image](https://github.com/user-attachments/assets/42ceb3b2-5093-4655-b001-507023f7806d)
+
+  - Xóa PV Physical Volume:
+  ```
+  sudo pvremove /dev/sdb
+  sudo pvremove /dev/sdd
+  ```
+  Do sdb đã xóa trước đó , nên giờ chỉ xóa sdd được
+
+  -  Kiểm tra lại:
+  ```
+  sudo pvs
+  sudo vgs
+  sudo lvs
+
+  ```
+
+  Kết quả:
+
+  ![image](https://github.com/user-attachments/assets/8d6f4b03-d7b6-4fd4-ad6e-889b2ce779c0)
+
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+  
+  - 
+  
+
+
+  
+  
 
 
 
