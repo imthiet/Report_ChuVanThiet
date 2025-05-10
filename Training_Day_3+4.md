@@ -487,33 +487,48 @@ B3: Tải và cài đặt MDaemon Mail Server bản Trial  từ trang chính th�
 - Gửi và nhận Email:
   
   SMTP             port 25    TCP    Gửi email giữa các máy chủ  
+
   SMTP overSSL     port 465   TCP    Gửi email bảo mật
+
   SMTP Submission  port 587   TCP    Gửi email từ client đến server(Outlook, Thunderbird,...)
+
   POP3             port 110   TCP    Tải email về từ Server
+
   POP3 over SSL    port 995   TCP    Tải email bảo mật
+
   IMAP             port 143   TCP    ĐỒng bộ email từ nhiều thiết bị
+
   IMAP over SSL    port 993   TCP    Đồng bộ email bảo mật   
 
 
 - Giao diện webmail & quản trị
 
   Webmail(HTTP)    port 3000  TCP    Gaio diện người dùng access email qua trình duyệt(!secure)
+
   Webmail(HTTPS)   port 443   TCP    gaio diện người dùng(bảo mật SSl,TLS)
+
   Webadmin(HTTP)   port 1000  TCP    Quản trị server qua trình duyệt
+
   Remote Admin     port 1443  TCP    Quản trị từ xa(SSL bảo mật)
 
 - Đồng bộ hóa với thiết bị di động/ dịch vụ nâng cao
   
   ActiveSync      port 80/443  TCP  Đồng bộ email, lịch, danh bạ với phone
+
   CalDAV          port 8008    TCP  Calendar cho clinet như thunderbird
+
   CARDAV          port 8843    TCP  ĐỒng bộ danh bạ
+
   LDAP            port 389     TCP  Dịch vụ danh bạ nội bộ( nếu enable)
+
   Minger          port 118     TCP  Kiểm tra trạng thái user giữa nhiều MDaemon server
 
 - Bảo mật & lọc thư rác
   
   Spam Filter          Nội bộ    Không cần mở port, dùng nội bộ
+
   Antiviruss Engine    Nội bộ    Được bậy sẵn - không cần cấu hình riêng
+
   Content Filter       Nội bộ    THiết lập từ giao diện quản trị
 
 
